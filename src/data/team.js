@@ -1,3 +1,9 @@
+import img1 from '../assets/team/team-1.jpeg';
+import img2 from '../assets/team/team-2.jpeg';
+import img3 from '../assets/team/team-3.jpeg';
+import img4 from '../assets/team/team-4.jpeg';
+import imgUnnati from '../assets/team/unnati-vora.png';
+
 export const teamMembers = [
   {
     id: 1,
@@ -8,6 +14,7 @@ export const teamMembers = [
     phone: '+91 985 009 2122',
     image: null,
     imageAlt: 'Ar. Nilay Parekh — Principal Architect',
+    featured: true,
   },
   {
     id: 2,
@@ -18,5 +25,72 @@ export const teamMembers = [
     phone: '+91 982 244 0515',
     image: null,
     imageAlt: 'Ar. Nidhi Parekh — Principal Architect',
+    featured: true,
+  },
+  {
+    id: 3,
+    name: 'Ar. Unnati Vora',
+    role: 'Senior Architect',
+    education: 'CEPT University, Ahmedabad',
+    bio: '',
+    phone: '',
+    image: imgUnnati,
+    imageAlt: 'Ar. Unnati Vora — Senior Architect',
+    featured: false,
+  },
+  {
+    id: 4,
+    name: 'Ar. Priya Sharma',
+    role: 'Interior Designer',
+    education: 'NIFT, New Delhi',
+    bio: '',
+    phone: '',
+    image: img1,
+    imageAlt: 'Ar. Priya Sharma — Interior Designer',
+    featured: false,
+  },
+  {
+    id: 5,
+    name: 'Ar. Kavya Joshi',
+    role: 'Project Architect',
+    education: 'Bharti Vidyapeeth, Pune',
+    bio: '',
+    phone: '',
+    image: img2,
+    imageAlt: 'Ar. Kavya Joshi — Project Architect',
+    featured: false,
+  },
+  {
+    id: 6,
+    name: 'Ar. Sneha Patel',
+    role: 'Junior Architect',
+    education: 'Institute of Environmental Design, VVN, Gujarat',
+    bio: '',
+    phone: '',
+    image: img3,
+    imageAlt: 'Ar. Sneha Patel — Junior Architect',
+    featured: false,
+  },
+  {
+    id: 7,
+    name: 'Ar. Anita Desai',
+    role: 'Structural Consultant',
+    education: 'IIT Bombay',
+    bio: '',
+    phone: '',
+    image: img4,
+    imageAlt: 'Ar. Anita Desai — Structural Consultant',
+    featured: false,
+  },
+  {
+    id: 8,
+    name: 'Ar. Neha Kapoor',
+    role: 'Architectural Associate',
+    education: 'School of Planning & Architecture, Delhi',
+    bio: '',
+    phone: '',
+    image: null,
+    imageAlt: '',
+    featured: false,
   },
 ];

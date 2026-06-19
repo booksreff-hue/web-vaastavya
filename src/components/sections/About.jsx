@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { teamMembers } from '../../data/team';
 import TeamMemberCard from '../ui/TeamMemberCard';
+import TeamMemberCardSmall from '../ui/TeamMemberCardSmall';
 
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const transition = { duration: prefersReduced ? 0 : 0.5 };
@@ -50,20 +51,36 @@ export default function About({ id }) {
         </motion.h3>
 
         <div className="team-grid">
-          {teamMembers.map((member, i) => (
+          {teamMembers.filter(m => m.featured).map((member, i) => (
             <TeamMemberCard key={member.id} member={member} index={i} />
           ))}
         </div>
 
-        {/* 
+        <motion.h4
+          className="team-subheading"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={transition}
+        >
+          Associates & Team
+        </motion.h4>
+
+        <div className="team-grid-small">
+          {teamMembers.filter(m => !m.featured).map((member, i) => (
+            <TeamMemberCardSmall key={member.id} member={member} index={i} />
+          ))}
+        </div>
+
+        {/*
           ── TEAM PHOTO PLACEHOLDER ──────────────────────────────────────────
-          To add Ar. Nilay Parekh's photo:
-            1. Add the portrait image to: src/assets/team/nilay-parekh.jpg
+          To add a team member's photo:
+            1. Add the portrait image to: src/assets/team/{name-slug}.jpg
                (Recommended: 600×600px square crop, high resolution)
-            2. Import it at the top of this file:
-               import nilayPhoto from '../assets/team/nilay-parekh.jpg'
-            3. Replace `image: null` in src/data/team.js with: image: nilayPhoto
-          ── SAME STEPS FOR Ar. Nidhi Parekh → nidhi-parekh.jpg ─────────────
+            2. Import it in src/data/team.js:
+               import photo from '../assets/team/{name-slug}.jpg'
+            3. Replace `image: null` with `image: photo`
+          ────────────────────────────────────────────────────────────────────
         */}
       </div>
 
@@ -108,12 +125,49 @@ export default function About({ id }) {
           max-width: 900px;
           margin: 0 auto;
         }
+        .team-subheading {
+          font-family: var(--font-display);
+          font-size: var(--text-xl);
+          font-weight: 600;
+          text-align: center;
+          margin: var(--space-lg) 0 var(--space-md);
+          color: var(--color-near-black);
+          position: relative;
+        }
+        .team-subheading::before {
+          content: '';
+          display: block;
+          width: 60px;
+          height: 2px;
+          background: var(--color-red);
+          margin: 0 auto var(--space-sm);
+        }
+        .team-grid-small {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: var(--space-sm);
+          max-width: 900px;
+          margin: 0 auto;
+        }
+        @media (max-width: 900px) {
+          .team-grid-small {
+            grid-template-columns: repeat(3, 1fr);
+          }
+        }
         @media (max-width: 768px) {
           .team-grid {
             grid-template-columns: 1fr;
           }
+          .team-grid-small {
+            grid-template-columns: repeat(2, 1fr);
+          }
           .about-story p {
             font-size: var(--text-base);
+          }
+        }
+        @media (max-width: 480px) {
+          .team-grid-small {
+            grid-template-columns: 1fr;
           }
         }
       `}</style>
