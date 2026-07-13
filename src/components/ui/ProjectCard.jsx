@@ -27,7 +27,7 @@ export default function ProjectCard({ project, index }) {
         <div className="project-info">
           <h3 className="project-title">{title}</h3>
           <p className="project-location">{location} | {year}</p>
-          <p className="project-description">{description}</p>
+          {description && <p className="project-description">{description}</p>}
         </div>
         <div className="project-visual">
           <div className="project-carousel">
@@ -105,11 +105,16 @@ export default function ProjectCard({ project, index }) {
           position: relative;
           border-radius: var(--radius-sm);
           overflow: hidden;
+          background: #f0f0f0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
         .project-main-img {
           width: 100%;
-          height: 300px;
-          object-fit: cover;
+          height: auto;
+          max-height: 65vh;
+          object-fit: contain;
           border-radius: var(--radius-sm);
         }
         .carousel-arrow {
@@ -166,7 +171,7 @@ export default function ProjectCard({ project, index }) {
             grid-template-columns: 1fr;
           }
           .project-main-img {
-            height: 220px;
+            max-height: 50vh;
           }
         }
       `}</style>
