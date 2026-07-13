@@ -72,9 +72,10 @@ export default function ProjectCard({ project, index }) {
         }
         .project-card-content {
           display: grid;
-          grid-template-columns: 300px 1fr;
+          grid-template-columns: 2fr 3fr;
           gap: var(--space-lg);
-          padding: var(--space-md);
+          padding: var(--space-lg) var(--space-lg) var(--space-md);
+          align-items: start;
         }
         .project-info {
           padding-top: var(--space-xs);
@@ -99,19 +100,21 @@ export default function ProjectCard({ project, index }) {
         .project-visual {
           display: flex;
           flex-direction: column;
-          gap: 0.65rem;
+          gap: 0.5rem;
+          align-items: center;
         }
         .project-carousel {
           position: relative;
           border-radius: var(--radius-sm);
           background: #f5f5f5;
           overflow: hidden;
+          width: 100%;
         }
         .project-carousel-stage {
           position: relative;
           width: 100%;
           height: 0;
-          padding-bottom: 56.25%;
+          padding-bottom: 66.67%;
           overflow: hidden;
         }
         .project-main-img {
@@ -154,15 +157,17 @@ export default function ProjectCard({ project, index }) {
         .carousel-arrow--next { right: 0.75rem; }
         .project-thumbs {
           display: flex;
-          gap: 0.4rem;
+          gap: 0.5rem;
           overflow-x: auto;
           padding-bottom: 0.25rem;
           scrollbar-width: thin;
+          justify-content: center;
+          flex-wrap: wrap;
         }
         .project-thumb {
           flex: 0 0 auto;
-          width: 54px;
-          height: 54px;
+          width: 58px;
+          height: 58px;
           border: 2px solid transparent;
           border-radius: var(--radius-sm);
           overflow: hidden;
@@ -194,7 +199,7 @@ export default function ProjectCard({ project, index }) {
             order: -1;
           }
           .project-carousel-stage {
-            padding-bottom: 56.25%;
+            padding-bottom: 66.67%;
           }
           .carousel-arrow {
             opacity: 1;
