@@ -108,17 +108,19 @@ export default function ProjectCard({ project, index }) {
           overflow: hidden;
         }
         .project-carousel-stage {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          min-height: 200px;
-          max-height: 55vh;
+          position: relative;
+          width: 100%;
+          height: 0;
+          padding-bottom: 56.25%;
+          overflow: hidden;
         }
         .project-main-img {
-          max-width: 100%;
-          height: auto;
-          max-height: 55vh;
-          object-fit: contain;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
           display: block;
         }
         .carousel-arrow {
@@ -192,11 +194,7 @@ export default function ProjectCard({ project, index }) {
             order: -1;
           }
           .project-carousel-stage {
-            max-height: 50vh;
-          }
-          .project-main-img {
-            max-width: 100%;
-            max-height: 50vh;
+            padding-bottom: 56.25%;
           }
           .carousel-arrow {
             opacity: 1;
@@ -211,12 +209,7 @@ export default function ProjectCard({ project, index }) {
             font-size: var(--text-xl);
           }
           .project-carousel-stage {
-            min-height: 160px;
-            max-height: 42vh;
-          }
-          .project-main-img {
-            max-width: 100%;
-            max-height: 42vh;
+            padding-bottom: 60%;
           }
         }
       `}</style>
