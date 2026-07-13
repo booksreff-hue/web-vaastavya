@@ -115,7 +115,7 @@ export default function ProjectCard({ project, index }) {
           max-height: 55vh;
         }
         .project-main-img {
-          width: 100%;
+          max-width: 100%;
           height: auto;
           max-height: 55vh;
           object-fit: contain;
@@ -195,6 +195,7 @@ export default function ProjectCard({ project, index }) {
             max-height: 50vh;
           }
           .project-main-img {
+            max-width: 100%;
             max-height: 50vh;
           }
           .carousel-arrow {
@@ -214,6 +215,7 @@ export default function ProjectCard({ project, index }) {
             max-height: 42vh;
           }
           .project-main-img {
+            max-width: 100%;
             max-height: 42vh;
           }
         }
