@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import logo from '../../assets/logo.png';
 
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const transition = { duration: prefersReduced ? 0 : 0.4, ease: 'easeInOut' };
@@ -46,7 +47,7 @@ export default function ProjectCard({ project, index }) {
               </AnimatePresence>
             </div>
             <div className="project-watermark">
-              <span>Aasthavya</span>
+              <img src={logo} alt="Vaastava" loading="lazy" />
             </div>
             <button className="carousel-arrow carousel-arrow--prev" onClick={goPrev} aria-label="Previous image">&#8249;</button>
             <button className="carousel-arrow carousel-arrow--next" onClick={goNext} aria-label="Next image">&#8250;</button>
@@ -138,14 +139,15 @@ export default function ProjectCard({ project, index }) {
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          font-family: var(--font-display);
-          font-size: clamp(2rem, 5vw, 3rem);
-          font-weight: 700;
-          color: rgba(178, 34, 34, 0.08);
           pointer-events: none;
-          text-shadow: none;
           user-select: none;
           z-index: 1;
+          opacity: 0.06;
+        }
+        .project-watermark img {
+          width: clamp(120px, 25vw, 200px);
+          height: auto;
+          filter: grayscale(1);
         }
         .carousel-arrow {
           position: absolute;
