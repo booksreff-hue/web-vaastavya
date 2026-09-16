@@ -73,7 +73,8 @@ export default function Contact({ id }) {
           transition={{ ...transition, delay: 0.3 }}
         >
           <a href="mailto:info.vaastavya@gmail.com" className="contact-btn">
-            Start Your Project
+            <span>Design Your</span>
+            <span>Dream Space</span>
           </a>
         </motion.div>
 
@@ -152,17 +153,22 @@ export default function Contact({ id }) {
           margin-bottom: var(--space-lg);
         }
         .contact-btn {
-          display: inline-block;
+          display: inline-flex;
+          align-items: center;
           font-family: var(--font-body);
           font-size: var(--text-lg);
           font-weight: 500;
           color: white;
+          gap: 0.5rem;
           border: 2px solid white;
           padding: var(--space-sm) var(--space-lg);
           border-radius: var(--radius-sm);
           cursor: pointer;
           transition: background 0.3s, color 0.3s;
           text-decoration: none;
+        }
+        .contact-btn span {
+          display: block;
         }
         .contact-btn:hover {
           background: var(--color-red);

@@ -71,6 +71,9 @@ export default function TeamMemberCard({ member, index }) {
           box-shadow: var(--shadow-card);
           overflow: hidden;
           transition: box-shadow 0.3s;
+          display: flex;
+          flex-direction: column;
+          height: 100%;
         }
         .team-card:hover {
           box-shadow: var(--shadow-hover);
@@ -79,9 +82,14 @@ export default function TeamMemberCard({ member, index }) {
           width: 100%;
           aspect-ratio: 1;
           object-fit: cover;
+          flex-shrink: 0;
         }
         .team-info {
           padding: var(--space-sm) var(--space-md) var(--space-md);
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
         }
         .team-name {
           font-family: var(--font-display);
@@ -106,6 +114,7 @@ export default function TeamMemberCard({ member, index }) {
           font-size: 0.95rem;
           line-height: 1.7;
           margin-bottom: var(--space-xs);
+          flex-grow: 1;
         }
         .team-phone {
           font-size: var(--text-sm);

@@ -10,7 +10,7 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer-inner">
-        <img src={logo} alt="Vaastavya" className="footer-logo" loading="lazy" />
+        <img src={logo} alt="Vaastava" className="footer-logo" loading="lazy" />
         <p className="footer-tagline">Architecture &bull; Interior Design</p>
 
         <div className="footer-social">
@@ -36,7 +36,7 @@ export default function Footer() {
           ))}
         </div>
 
-        <p className="footer-copy">&copy; {new Date().getFullYear()} Vaastavya. All rights reserved.</p>
+        <p className="footer-copy">&copy; {new Date().getFullYear()} Vaastava. All rights reserved.</p>
       </div>
 
       <style>{`

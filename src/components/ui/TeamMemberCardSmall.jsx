@@ -39,13 +39,16 @@ export default function TeamMemberCardSmall({ member, index }) {
         <p className="team-role-small">{member.role}</p>
         {member.education && <p className="team-edu-small">{member.education}</p>}
       </div>
-      <style>{`
+      <style>
         .team-card-small {
           background: white;
           border-radius: var(--radius-md);
           box-shadow: var(--shadow-card);
           overflow: hidden;
           transition: box-shadow 0.3s;
+          display: flex;
+          flex-direction: column;
+          height: 100%;
         }
         .team-card-small:hover {
           box-shadow: var(--shadow-hover);
@@ -57,6 +60,7 @@ export default function TeamMemberCardSmall({ member, index }) {
           display: flex;
           align-items: center;
           justify-content: center;
+          flex-shrink: 0;
         }
         .team-avatar-small-initials {
           font-family: var(--font-display);
@@ -69,9 +73,14 @@ export default function TeamMemberCardSmall({ member, index }) {
           width: 100%;
           aspect-ratio: 1;
           object-fit: cover;
+          flex-shrink: 0;
         }
         .team-info-small {
           padding: var(--space-xs) var(--space-sm) var(--space-sm);
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
         }
         .team-name-small {
           font-family: var(--font-display);
@@ -93,7 +102,7 @@ export default function TeamMemberCardSmall({ member, index }) {
           font-weight: 300;
           line-height: 1.3;
         }
-      `}</style>
+      </style>
     </motion.div>
   );
 }

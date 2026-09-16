@@ -17,17 +17,17 @@ export default function About({ id }) {
           viewport={{ once: true }}
           transition={transition}
         >
-          We Are Vaastavya
+          We Are Vaastava
         </motion.h2>
 
         <div className="about-story">
           <p>
             A partnership firm started in Pune in 2006. We have worked on diverse typologies — residential apartments,
             housing societies, commercial complexes, hospitals, resorts, religious buildings, bungalows, farm houses,
-            hotels, and institutional projects across India and Africa.
+            hotels, and institutional projects across India, the Middle East, and Africa.
           </p>
           <p>
-            With offices in Pune, Vapi, and Kinshasa (DRC), our practice spans continents and cultures, bringing
+            With offices in Pune, Vapi, our practice spans continents and cultures, bringing
             rigorous architectural thinking to every context we work in.
           </p>
           <blockquote className="about-quote">
@@ -116,7 +116,7 @@ export default function About({ id }) {
           font-weight: 700;
           text-align: center;
           margin-bottom: var(--space-lg);
-          color: var(--color-near-black);
+          color: var(--color-graphite);
         }
         .team-grid {
           display: grid;
@@ -131,7 +131,7 @@ export default function About({ id }) {
           font-weight: 600;
           text-align: center;
           margin: var(--space-lg) 0 var(--space-md);
-          color: var(--color-near-black);
+          color: var(--color-graphite);
           position: relative;
         }
         .team-subheading::before {
@@ -139,7 +139,7 @@ export default function About({ id }) {
           display: block;
           width: 60px;
           height: 2px;
-          background: var(--color-red);
+          background: var(--color-graphite);
           margin: 0 auto var(--space-sm);
         }
         .team-grid-small {

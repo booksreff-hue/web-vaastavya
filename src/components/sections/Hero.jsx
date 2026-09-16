@@ -1,9 +1,10 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCarousel } from '../../hooks/useCarousel';
 import CarouselDots from '../ui/CarouselDots';
 
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const bgRef = useRef(null);
 
 const UNSPLASH = 'https://images.unsplash.com';
 
@@ -76,12 +77,13 @@ export default function Hero({ id }) {
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          {/* TODO: Replace with actual hero images — Recommended: 1920×1080px JPEG */}
-          <img
+          <motion.img
+            ref={bgRef}
             src={slide.image}
             alt={slide.title}
             className="hero-bg"
             loading="eager"
+            whileHover={{ x: [0, -5, 5, 0], transition: { duration: 3 } }}
           />
           <div className="hero-overlay" />
         </motion.div>

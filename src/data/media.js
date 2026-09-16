@@ -7,7 +7,7 @@ export const mediaItems = [
     title: 'Sustainable Architecture Excellence',
     source: 'Architectural Digest',
     year: '2024',
-    description: 'Vaastavya\'s innovative approach to sustainable residential design featured in Architectural Digest\'s annual review of emerging Indian architecture firms.',
+    description: 'Vaastava\'s innovative approach to sustainable residential design featured in Architectural Digest\'s annual review of emerging Indian architecture firms.',
     image: `${UNSPLASH}/photo-1504711434969-e33886168d6c?w=600&q=80`,
     imageAlt: 'Architectural Digest feature article',
   },

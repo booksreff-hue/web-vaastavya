@@ -62,8 +62,9 @@ section {
   font-weight: 700;
   margin-bottom: var(--space-lg);
   padding-bottom: var(--space-sm);
-  border-bottom: 3px solid var(--color-red);
+  border-bottom: 3px solid var(--color-graphite);
   width: fit-content;
+  color: var(--color-graphite);
 }
 
 @media (max-width: 768px) {

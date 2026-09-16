@@ -50,7 +50,7 @@ export default function Header() {
     >
       <div className="header-inner">
         <button onClick={() => scrollTo('home')} className="header-logo-btn" aria-label="Go to top">
-          <img src={logo} alt="Vaastavya" className="header-logo" />
+          <img src={logo} alt="Vaastava" className="header-logo" />
         </button>
 
         <nav className="header-nav">

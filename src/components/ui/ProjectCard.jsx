@@ -11,7 +11,7 @@ export default function ProjectCard({ project, index }) {
 
   const currentImg = images[imgIndex];
 
-  const goNext = () => setImgIndex((i) => (i + 1) % images.length);
+  const goNext = () => setImgIndex((i) => (i + 1 + images.length) % images.length);
   const goPrev = () => setImgIndex((i) => (i - 1 + images.length) % images.length);
 
   return (
@@ -25,8 +25,8 @@ export default function ProjectCard({ project, index }) {
       <div className="project-card-content">
         <div className="project-info">
           <h3 className="project-title">{title}</h3>
-          <p className="project-location">{location}{location && year ? ' | ' : ''}{year}</p>
           {description && <p className="project-description">{description}</p>}
+          <p className="project-location">{location}{location && year ? ' | ' : ''}{year}</p>
         </div>
         <div className="project-visual">
           <div className="project-carousel">
@@ -45,6 +45,9 @@ export default function ProjectCard({ project, index }) {
                 />
               </AnimatePresence>
             </div>
+            <div className="project-watermark">
+              <span>Aasthavya</span>
+            </div>
             <button className="carousel-arrow carousel-arrow--prev" onClick={goPrev} aria-label="Previous image">&#8249;</button>
             <button className="carousel-arrow carousel-arrow--next" onClick={goNext} aria-label="Next image">&#8250;</button>
           </div>
@@ -62,7 +65,7 @@ export default function ProjectCard({ project, index }) {
           </div>
         </div>
       </div>
-      <style>{`
+      <style>`
         .project-card {
           background: white;
           border-radius: var(--radius-md);
@@ -71,37 +74,38 @@ export default function ProjectCard({ project, index }) {
           overflow: hidden;
         }
         .project-card-content {
-          display: grid;
-          grid-template-columns: 2fr 3fr;
-          gap: var(--space-lg);
-          padding: var(--space-lg) var(--space-lg) var(--space-md);
-          align-items: start;
+          max-width: 800px;
+          margin: 0 auto;
+          padding: var(--space-lg) var(--space-md);
+          text-align: center;
         }
         .project-info {
-          padding-top: var(--space-xs);
+          padding: var(--space-xs) 0 var(--space-sm);
         }
         .project-title {
           font-family: var(--font-display);
           font-size: var(--text-2xl);
-          margin-bottom: 0.25rem;
           font-weight: 600;
           letter-spacing: 0.02em;
-        }
-        .project-location {
-          color: var(--color-grey);
-          margin-bottom: var(--space-sm);
-          font-size: var(--text-sm);
+          margin-bottom: var(--space-xs);
+          color: var(--color-near-black);
         }
         .project-description {
           font-size: var(--text-base);
           line-height: 1.7;
           color: var(--color-near-black);
+          margin-bottom: var(--space-md);
+        }
+        .project-location {
+          color: var(--color-grey);
+          font-size: var(--text-sm);
         }
         .project-visual {
+          position: relative;
           display: flex;
           flex-direction: column;
-          gap: 0.5rem;
           align-items: center;
+          gap: 1rem;
         }
         .project-carousel {
           position: relative;
@@ -109,6 +113,8 @@ export default function ProjectCard({ project, index }) {
           background: #f5f5f5;
           overflow: hidden;
           width: 100%;
+          max-width: 600px;
+          margin: 0 auto;
         }
         .project-carousel-stage {
           position: relative;
@@ -116,6 +122,7 @@ export default function ProjectCard({ project, index }) {
           height: 0;
           padding-bottom: 66.67%;
           overflow: hidden;
+          margin: 0 auto;
         }
         .project-main-img {
           position: absolute;
@@ -125,6 +132,20 @@ export default function ProjectCard({ project, index }) {
           height: 100%;
           object-fit: cover;
           display: block;
+        }
+        .project-watermark {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-family: var(--font-display);
+          font-size: clamp(2rem, 5vw, 3rem);
+          font-weight: 700;
+          color: rgba(178, 34, 34, 0.08);
+          pointer-events: none;
+          text-shadow: none;
+          user-select: none;
+          z-index: 1;
         }
         .carousel-arrow {
           position: absolute;
@@ -143,9 +164,8 @@ export default function ProjectCard({ project, index }) {
           justify-content: center;
           transition: background 0.2s;
           line-height: 1;
-          z-index: 2;
           opacity: 0;
-          transition: opacity 0.2s, background 0.2s;
+          z-index: 2;
         }
         .project-carousel:hover .carousel-arrow {
           opacity: 1;
@@ -163,6 +183,7 @@ export default function ProjectCard({ project, index }) {
           scrollbar-width: thin;
           justify-content: center;
           flex-wrap: wrap;
+          margin-top: 0.5rem;
         }
         .project-thumb {
           flex: 0 0 auto;
@@ -183,7 +204,7 @@ export default function ProjectCard({ project, index }) {
         }
         .project-thumb.active {
           opacity: 1;
-          border-color: var(--color-red);
+          border-color: var(--color-graphite);
         }
         .project-thumb img {
           width: 100%;
@@ -192,11 +213,10 @@ export default function ProjectCard({ project, index }) {
         }
         @media (max-width: 1024px) {
           .project-card-content {
-            grid-template-columns: 1fr;
-            gap: var(--space-md);
+            padding: var(--space-sm);
           }
-          .project-info {
-            order: -1;
+          .project-title {
+            font-size: var(--text-xl);
           }
           .project-carousel-stage {
             padding-bottom: 66.67%;
@@ -208,16 +228,18 @@ export default function ProjectCard({ project, index }) {
         @media (max-width: 768px) {
           .project-card-content {
             padding: var(--space-sm);
-            gap: var(--space-sm);
           }
           .project-title {
-            font-size: var(--text-xl);
+            font-size: var(--text-lg);
           }
           .project-carousel-stage {
             padding-bottom: 60%;
           }
+          .carousel-arrow {
+            opacity: 1;
+          }
         }
-      `}</style>
+      `</style>
     </motion.div>
   );
 }

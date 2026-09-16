@@ -12,7 +12,7 @@ function App() {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
     const meta = document.createElement('meta');
     meta.name = 'description';
-    meta.content = 'Vaastavya — Architecture & Interior Design. Award-winning studio crafting spaces across India and Africa since 2006.';
+    meta.content = 'Vaastava — Architecture & Interior Design. Award-winning studio crafting spaces across India and Africa since 2006.';
     document.head.appendChild(meta);
 
     return () => {
