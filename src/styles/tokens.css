@@ -9,9 +9,9 @@
   --color-white: #ffffff;
   --color-black: #0a0a0a;
 
-  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-display: 'Niramit', sans-serif;
   --font-display-weight: 400;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Roboto', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
   --text-xs: 0.7rem;

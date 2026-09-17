@@ -176,7 +176,7 @@ export default function ProjectCard({ project, index, total }) {
           opacity: 0.1;
         }
         .project-watermark img {
-          width: clamp(140px, 30vw, 240px);
+          width: clamp(168px, 36vw, 288px);
           height: auto;
           filter: grayscale(1);
         }
