@@ -169,11 +169,11 @@ export default function ProjectCard({ project, index, total }) {
           position: absolute;
           top: 50%;
           left: 50%;
-          transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%) rotate(-30deg);
           pointer-events: none;
           user-select: none;
           z-index: 1;
-          opacity: 0.04;
+          opacity: 0.1;
         }
         .project-watermark img {
           width: clamp(140px, 30vw, 240px);
