@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { useScrollSpy } from '../../hooks/useScrollSpy';
 import logo from '../../assets/logo.png';
 
@@ -17,19 +17,18 @@ const SECTION_IDS = NAV_ITEMS.map((item) => item.id);
 
 function scrollTo(id) {
   const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (el) el.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' });
 }
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const activeId = useScrollSpy(SECTION_IDS, 80);
+  const { scrollY } = useScroll();
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  useMotionValueEvent(scrollY, 'change', (y) => {
+    setScrolled(y > 50);
+  });
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
@@ -37,10 +36,10 @@ export default function Header() {
   }, [menuOpen]);
 
   const headerBg = scrolled
-    ? 'rgba(255,255,255,0.97)'
+    ? 'rgba(250,249,246,0.97)'
     : 'transparent';
-  const textColor = scrolled ? '#1A1A1A' : '#FFFFFF';
-  const shadow = scrolled ? '0 2px 16px rgba(0,0,0,0.08)' : 'none';
+  const textColor = scrolled ? '#262626' : '#FFFFFF';
+  const shadow = scrolled ? '0 1px 0 rgba(38,38,38,0.08)' : 'none';
 
   return (
     <motion.header
@@ -49,11 +48,11 @@ export default function Header() {
       transition={transition}
     >
       <div className="header-inner">
-        <button onClick={() => scrollTo('home')} className="header-logo-btn" aria-label="Go to top">
-          <img src={logo} alt="Vaastava" className="header-logo" />
+        <button onClick={() => scrollTo('home')} className="header-logo-btn" aria-label="VAASTAVYA - go to top">
+          <img src={logo} alt="VAASTAVYA" className="header-logo" />
         </button>
 
-        <nav className="header-nav">
+        <nav className="header-nav" aria-label="Primary">
           {NAV_ITEMS.map((item) => (
             <button
               key={item.id}
@@ -64,6 +63,12 @@ export default function Header() {
               {item.label}
             </button>
           ))}
+          <button
+            className={`header-cta${scrolled ? ' header-cta--dark' : ''}`}
+            onClick={() => scrollTo('contact')}
+          >
+            Start a Project
+          </button>
         </nav>
 
         <button
@@ -109,6 +114,12 @@ export default function Header() {
                   {item.label}
                 </button>
               ))}
+              <button
+                className="mobile-link mobile-link--cta"
+                onClick={() => { scrollTo('contact'); setMenuOpen(false); }}
+              >
+                Start a Project
+              </button>
             </div>
           </motion.div>
         )}
@@ -121,42 +132,53 @@ export default function Header() {
           left: 0;
           right: 0;
           z-index: 1000;
-          padding: 0.75rem 0;
+          height: var(--header-height);
+          display: flex;
+          align-items: center;
         }
         .header-inner {
+          width: 100%;
           max-width: var(--max-width);
           margin: 0 auto;
           padding: 0 var(--space-md);
           display: flex;
           justify-content: space-between;
           align-items: center;
+          gap: var(--space-md);
         }
         .header-logo-btn {
           background: none;
           border: none;
           padding: 0;
           cursor: pointer;
+          flex-shrink: 0;
+        }
+        .header-logo-btn:focus-visible {
+          outline: 2px solid currentColor;
+          outline-offset: 4px;
         }
         .header-logo {
-          height: 40px;
+          height: 36px;
           width: auto;
         }
         .header-nav {
           display: flex;
+          align-items: center;
           gap: var(--space-md);
         }
         .header-link {
           font-family: var(--font-body);
           font-size: var(--text-sm);
           font-weight: 500;
-          letter-spacing: 0.5px;
+          letter-spacing: 0.06em;
           text-transform: uppercase;
           background: none;
           border: none;
           padding: 0.5rem 0;
           cursor: pointer;
           position: relative;
-          transition: color 0.3s;
+          transition: color var(--transition-fast);
+          white-space: nowrap;
         }
         .header-link::after {
           content: '';
@@ -164,13 +186,49 @@ export default function Header() {
           bottom: 0;
           left: 0;
           width: 0;
-          height: 2px;
-          background: var(--color-red);
-          transition: width 0.3s;
+          height: 1px;
+          background: currentColor;
+          transition: width var(--transition-fast);
         }
         .header-link.active::after,
         .header-link:hover::after {
           width: 100%;
+        }
+        .header-link:focus-visible {
+          outline: 2px solid currentColor;
+          outline-offset: 4px;
+        }
+        .header-cta {
+          font-family: var(--font-body);
+          font-size: var(--text-sm);
+          font-weight: 500;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          color: #FFFFFF;
+          border: 1px solid #FFFFFF;
+          background: transparent;
+          padding: 0.6rem 1.25rem;
+          border-radius: var(--radius-sm);
+          cursor: pointer;
+          white-space: nowrap;
+          transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+        }
+        .header-cta--dark {
+          color: var(--color-graphite);
+          border-color: var(--color-graphite);
+        }
+        .header-cta:hover {
+          background: var(--color-graphite);
+          border-color: var(--color-graphite);
+          color: var(--color-warm-white);
+        }
+        .header-cta--dark:hover {
+          background: var(--color-graphite);
+          color: var(--color-warm-white);
+        }
+        .header-cta:focus-visible {
+          outline: 2px solid currentColor;
+          outline-offset: 4px;
         }
         .hamburger {
           display: none;
@@ -191,8 +249,12 @@ export default function Header() {
         }
         .mobile-menu {
           overflow: hidden;
-          background: rgba(255,255,255,0.98);
-          box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+          background: var(--color-warm-white);
+          border-bottom: 1px solid var(--color-concrete);
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
         }
         .mobile-menu-links {
           display: flex;
@@ -203,19 +265,24 @@ export default function Header() {
         .mobile-link {
           font-family: var(--font-display);
           font-size: var(--text-lg);
-          font-weight: 600;
+          font-weight: 400;
           background: none;
           border: none;
+          border-bottom: 1px solid var(--color-concrete);
           padding: 0.75rem 0;
           text-align: left;
           cursor: pointer;
-          color: var(--color-near-black);
-          border-bottom: 1px solid #eee;
+          color: var(--color-graphite);
         }
         .mobile-link.active {
-          color: var(--color-red);
+          font-style: italic;
         }
-        @media (max-width: 768px) {
+        .mobile-link--cta {
+          border-bottom: none;
+          text-decoration: underline;
+          text-underline-offset: 4px;
+        }
+        @media (max-width: 860px) {
           .header-nav { display: none; }
           .hamburger { display: flex; }
         }

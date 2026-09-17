@@ -1,28 +1,56 @@
-import { motion } from 'framer-motion';
 import { projects } from '../../data/projects';
 import ProjectCard from '../ui/ProjectCard';
 
-const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const transition = { duration: prefersReduced ? 0 : 0.5 };
-
 export default function Work({ id }) {
   return (
-    <section id={id}>
+    <section id={id} className="work" aria-labelledby="work-title">
       <div className="container">
-        <motion.h2
-          className="section-title"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={transition}
-        >
-          Our Work
-        </motion.h2>
+        <div className="work-header">
+          <h2 id="work-title" className="section-title">
+            Selected Work
+          </h2>
+          <p className="work-intro">
+            Interior design projects that balance function, materiality, and human experience.
+          </p>
+        </div>
 
-        {projects.map((project, i) => (
-          <ProjectCard key={project.id} project={project} index={i} />
-        ))}
+        <div className="work-grid">
+          {projects.map((project, i) => (
+            <ProjectCard key={project.id} project={project} index={i} total={projects.length} />
+          ))}
+        </div>
       </div>
+
+      <style>{`
+        .work {
+          background: var(--color-warm-white);
+        }
+        .work-header {
+          max-width: var(--max-width-narrow);
+          margin: 0 auto var(--space-2xl);
+          text-align: center;
+        }
+        .work-intro {
+          font-family: var(--font-body);
+          font-size: var(--text-lg);
+          line-height: 1.7;
+          color: var(--color-stone);
+          margin-top: var(--space-md);
+          font-weight: 300;
+        }
+        .work-grid {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-2xl);
+          max-width: 900px;
+          margin: 0 auto;
+        }
+        @media (max-width: 768px) {
+          .work-grid {
+            gap: var(--space-xl);
+          }
+        }
+      `}</style>
     </section>
   );
 }

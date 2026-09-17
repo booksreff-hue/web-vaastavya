@@ -9,10 +9,9 @@ import Contact from './components/sections/Contact';
 
 function App() {
   useEffect(() => {
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
     const meta = document.createElement('meta');
     meta.name = 'description';
-    meta.content = 'Vaastava — Architecture & Interior Design. Award-winning studio crafting spaces across India and Africa since 2006.';
+    meta.content = 'VAASTAVYA - Architecture & Interior Design. Studio crafting spaces across India, Africa and the Middle East since 2006.';
     document.head.appendChild(meta);
 
     return () => {

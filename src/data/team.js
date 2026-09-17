@@ -12,10 +12,10 @@ export const teamMembers = [
     name: 'Ar. Nilay Parekh',
     role: 'Principal Architect & Co-Founder',
     education: 'Institute of Environmental Design, VVN, Gujarat',
-    bio: 'With over 18 years of practice, Nilay leads the architectural design vision at Vaastava, bringing rigorous spatial thinking and a deep respect for material culture to every project.',
+    bio: 'With over 18 years of practice, Nilay leads the architectural design vision at VAASTAVYA, bringing rigorous spatial thinking and a deep respect for material culture to every project.',
     phone: '+91 985 009 2122',
     image: imgPrincipal,
-    imageAlt: 'Ar. Nilay Parekh — Principal Architect',
+    imageAlt: 'Ar. Nilay Parekh - Principal Architect',
     featured: true,
   },
   {
@@ -23,10 +23,10 @@ export const teamMembers = [
     name: 'Ar. Nidhi Parekh',
     role: 'Principal Architect & Co-Founder',
     education: 'Bharati Vidyapeeth, Pune',
-    bio: 'Nidhi helms interior design and client relationships at Vaastava, crafting interiors that are both deeply personal and spatially compelling, from Pune to the Middle East.',
+    bio: 'Nidhi helms interior design and client relationships at VAASTAVYA, crafting interiors that are both deeply personal and spatially compelling, from Pune to the Middle East.',
     phone: '+91 982 244 0515',
     image: imgCofounder,
-    imageAlt: 'Ar. Nidhi Parekh — Principal Architect',
+    imageAlt: 'Ar. Nidhi Parekh - Principal Architect',
     featured: true,
   },
   {
@@ -37,7 +37,7 @@ export const teamMembers = [
     bio: '',
     phone: '',
     image: img1,
-    imageAlt: 'Sumedha Dere — Architect',
+    imageAlt: 'Sumedha Dere - Architect',
     featured: false,
   },
   {
@@ -48,7 +48,7 @@ export const teamMembers = [
     bio: '',
     phone: '',
     image: img2,
-    imageAlt: 'Unnati Vora — Architect',
+    imageAlt: 'Unnati Vora - Architect',
     featured: false,
   },
   {
@@ -59,7 +59,7 @@ export const teamMembers = [
     bio: '',
     phone: '',
     image: img3,
-    imageAlt: 'Prachi Gangane — Architect',
+    imageAlt: 'Prachi Gangane - Architect',
     featured: false,
   },
   {
@@ -70,7 +70,7 @@ export const teamMembers = [
     bio: '',
     phone: '',
     image: img4,
-    imageAlt: 'Suhani Shah — Architect',
+    imageAlt: 'Suhani Shah - Architect',
     featured: false,
   },
   {
@@ -81,7 +81,7 @@ export const teamMembers = [
     bio: '',
     phone: '',
     image: img5,
-    imageAlt: 'Ms. Jesinta Jadhav — Architect',
+    imageAlt: 'Ms. Jesinta Jadhav - Architect',
     featured: false,
   },
 ];

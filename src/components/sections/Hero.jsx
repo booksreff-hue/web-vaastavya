@@ -1,139 +1,98 @@
-import { useCallback, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useCarousel } from '../../hooks/useCarousel';
-import CarouselDots from '../ui/CarouselDots';
+import { motion } from 'framer-motion';
 
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const bgRef = useRef(null);
-
-const UNSPLASH = 'https://images.unsplash.com';
-
-const heroSlides = [
-  {
-    id: 1,
-    title: 'Modern Architecture',
-    subtitle: 'Innovative design solutions that transform skylines',
-    image: `${UNSPLASH}/photo-1600596542815-ffad4c1539a9?w=1920&q=85`,
-  },
-  {
-    id: 2,
-    title: 'Sustainable Living',
-    subtitle: 'Eco-friendly spaces that endure for generations',
-    image: `${UNSPLASH}/photo-1600585154526-990dced4db0d?w=1920&q=85`,
-  },
-  {
-    id: 3,
-    title: 'Commercial Excellence',
-    subtitle: 'Redefining workspaces for the future',
-    image: `${UNSPLASH}/photo-1600573472550-8090b5e0745e?w=1920&q=85`,
-  },
-];
-
-function LetterStagger({ text, className }) {
-  const letters = text.split('');
-  return (
-    <span className={className}>
-      {letters.map((char, i) => (
-        <motion.span
-          key={i}
-          className="hero-letter"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: prefersReduced ? 0 : 0.5,
-            delay: prefersReduced ? 0 : i * 0.04,
-            ease: 'easeOut',
-          }}
-        >
-          {char === ' ' ? '\u00A0' : char}
-        </motion.span>
-      ))}
-      <style>{`.hero-letter { display: inline-block; }`}</style>
-    </span>
-  );
-}
+const ease = [0.16, 1, 0.3, 1];
 
 export default function Hero({ id }) {
-  const { current, goTo, next, prev, setIsPaused } = useCarousel(heroSlides, {
-    autoAdvance: true,
-    interval: 5000,
-  });
-
-  const slide = heroSlides[current];
-
-  const handleNext = useCallback(() => next(), [next]);
-  const handlePrev = useCallback(() => prev(), [prev]);
-
   return (
-    <section id={id} className="hero">
-      <AnimatePresence mode="wait">
-        <motion.div
-          className="hero-slide"
-          key={slide.id}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: prefersReduced ? 0 : 0.8 }}
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
-          <motion.img
-            ref={bgRef}
-            src={slide.image}
-            alt={slide.title}
-            className="hero-bg"
-            loading="eager"
-            whileHover={{ x: [0, -5, 5, 0], transition: { duration: 3 } }}
-          />
-          <div className="hero-overlay" />
-        </motion.div>
-      </AnimatePresence>
-
-      <div className="hero-content">
-        <LetterStagger text="Crafting Spaces. Creating Legacies." className="hero-title" />
-        <AnimatePresence mode="wait">
-          <motion.p
-            key={slide.id}
-            className="hero-subtitle"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: prefersReduced ? 0 : 0.5, delay: prefersReduced ? 0 : 0.3 }}
-          >
-            {slide.subtitle}
-          </motion.p>
-        </AnimatePresence>
+    <section id={id} className="hero" aria-labelledby="hero-title">
+      <div className="hero-bg" aria-hidden="true">
+        <motion.img
+          src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=85"
+          alt=""
+          loading="eager"
+          initial={prefersReduced ? false : { scale: 1.06 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: prefersReduced ? 0 : 1.6, ease }}
+        />
+        <div className="hero-overlay" />
       </div>
 
-      <button
-        className="hero-arrow hero-arrow--prev"
-        onClick={handlePrev}
-        aria-label="Previous slide"
-      >
-        &#8249;
-      </button>
-      <button
-        className="hero-arrow hero-arrow--next"
-        onClick={handleNext}
-        aria-label="Next slide"
-      >
-        &#8250;
-      </button>
+      <div className="hero-content">
+        <div className="hero-text">
+          <motion.span
+            className="hero-eyebrow"
+            initial={prefersReduced ? false : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: prefersReduced ? 0 : 0.6, ease }}
+          >
+            Architecture & Interior Design
+          </motion.span>
+          <h1 id="hero-title" className="hero-title">
+            <motion.span
+              className="hero-title-line"
+              initial={prefersReduced ? false : { opacity: 0, y: 32 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: prefersReduced ? 0 : 0.7, delay: prefersReduced ? 0 : 0.1, ease }}
+            >
+              Crafting Spaces.
+            </motion.span>
+            <motion.span
+              className="hero-title-line"
+              initial={prefersReduced ? false : { opacity: 0, y: 32 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: prefersReduced ? 0 : 0.7, delay: prefersReduced ? 0 : 0.22, ease }}
+            >
+              Creating Legacies.
+            </motion.span>
+          </h1>
+          <motion.p
+            className="hero-description"
+            initial={prefersReduced ? false : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: prefersReduced ? 0 : 0.6, delay: prefersReduced ? 0 : 0.36, ease }}
+          >
+            VAASTAVYA is a multi-disciplinary design studio creating architectural
+            and interior experiences across India, Africa, and the Middle East since 2006.
+          </motion.p>
+          <motion.div
+            className="hero-cta-group"
+            initial={prefersReduced ? false : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: prefersReduced ? 0 : 0.6, delay: prefersReduced ? 0 : 0.48, ease }}
+          >
+            <a href="#contact" className="hero-cta">
+              <span>Start a Project</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </motion.div>
+        </div>
 
-      <CarouselDots total={heroSlides.length} active={current} onDotClick={goTo} />
+        <div className="hero-scroll-indicator" aria-hidden="true">
+          <span>Scroll</span>
+          <svg width="16" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <path d="M12 5v14M19 12l-7 7-7-7" />
+          </svg>
+        </div>
+      </div>
 
       <style>{`
         .hero {
           position: relative;
-          height: 100vh;
-          min-height: 600px;
+          min-height: 100dvh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           overflow: hidden;
         }
-        .hero-slide {
+        .hero-bg {
           position: absolute;
           inset: 0;
+          z-index: 0;
         }
-        .hero-bg {
+        .hero-bg img {
           width: 100%;
           height: 100%;
           object-fit: cover;
@@ -141,59 +100,161 @@ export default function Hero({ id }) {
         .hero-overlay {
           position: absolute;
           inset: 0;
-          background: rgba(0,0,0,0.38);
+          background: linear-gradient(
+            135deg,
+            rgba(10, 10, 10, 0.45) 0%,
+            rgba(10, 10, 10, 0.25) 50%,
+            rgba(10, 10, 10, 0.15) 100%
+          );
         }
         .hero-content {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          text-align: center;
-          color: white;
+          position: relative;
           z-index: 1;
-          width: 90%;
-          max-width: 900px;
+          width: 100%;
+          max-width: var(--max-width);
+          margin: 0 auto;
+          padding: 0 var(--space-md);
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: var(--grid-gutter);
+          align-items: center;
+          min-height: 100dvh;
+        }
+        .hero-text {
+          color: var(--color-white);
+          padding-top: calc(var(--header-height) + var(--space-xl));
+        }
+        .hero-eyebrow {
+          font-family: var(--font-mono);
+          font-size: var(--text-xs);
+          text-transform: uppercase;
+          letter-spacing: 0.25em;
+          color: rgba(255,255,255,0.7);
+          margin-bottom: var(--space-md);
+          display: block;
         }
         .hero-title {
           font-family: var(--font-display);
           font-size: var(--text-hero);
-          font-weight: 700;
-          margin-bottom: var(--space-sm);
-          line-height: 1.1;
+          font-weight: 400;
+          line-height: 1.05;
+          letter-spacing: -0.03em;
+          margin-bottom: var(--space-lg);
         }
-        .hero-subtitle {
+        .hero-title-line {
+          display: block;
+        }
+        .hero-title-line:first-child {
+          font-weight: 500;
+        }
+        .hero-description {
           font-family: var(--font-body);
-          font-size: clamp(1rem, 2vw, 1.5rem);
+          font-size: var(--text-lg);
+          line-height: 1.7;
+          color: rgba(255,255,255,0.85);
+          max-width: 480px;
+          margin-bottom: var(--space-xl);
           font-weight: 300;
-          opacity: 0.9;
         }
-        .hero-arrow {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          background: rgba(255,255,255,0.2);
-          border: none;
-          color: white;
-          font-size: 2rem;
-          width: 56px;
-          height: 56px;
-          cursor: pointer;
-          border-radius: 50%;
-          z-index: 2;
+        .hero-cta-group {
           display: flex;
+          flex-wrap: wrap;
+          gap: var(--space-sm);
+        }
+        .hero-cta {
+          display: inline-flex;
           align-items: center;
-          justify-content: center;
-          transition: background 0.3s, transform 0.2s;
-          line-height: 1;
+          gap: var(--space-xs);
+          font-family: var(--font-body);
+          font-size: var(--text-sm);
+          font-weight: 500;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          color: var(--color-white);
+          border: 1px solid var(--color-white);
+          padding: var(--space-sm) var(--space-lg);
+          border-radius: var(--radius-sm);
+          transition: background var(--transition-base), color var(--transition-base), transform var(--transition-fast);
+          background: transparent;
         }
-        .hero-arrow:hover {
-          background: rgba(255,255,255,0.35);
-          transform: translateY(-50%) scale(1.1);
+        .hero-cta:hover {
+          background: var(--color-white);
+          color: var(--color-graphite);
+          border-color: var(--color-white);
+          transform: translateX(4px);
         }
-        .hero-arrow--prev { left: var(--space-md); }
-        .hero-arrow--next { right: var(--space-md); }
+        .hero-cta:focus-visible {
+          outline: 2px solid var(--color-white);
+          outline-offset: 4px;
+        }
+        .hero-cta svg {
+          transition: transform var(--transition-fast);
+          flex-shrink: 0;
+        }
+        .hero-cta:hover svg {
+          transform: translateX(4px);
+        }
+        .hero-scroll-indicator {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: var(--space-xs);
+          font-family: var(--font-mono);
+          font-size: var(--text-xs);
+          text-transform: uppercase;
+          letter-spacing: 0.15em;
+          color: rgba(255,255,255,0.5);
+          position: absolute;
+          bottom: var(--space-xl);
+          left: var(--space-md);
+        }
+        @media (prefers-reduced-motion: no-preference) {
+          .hero-scroll-indicator {
+            animation: hero-scroll-bounce 2s ease-in-out infinite;
+          }
+          .hero-scroll-indicator svg {
+            animation: hero-arrow-bounce 1.5s ease-in-out infinite;
+          }
+        }
+        @keyframes hero-scroll-bounce {
+          0%, 100% { opacity: 0.5; transform: translateY(0); }
+          50% { opacity: 0.8; transform: translateY(4px); }
+        }
+        @keyframes hero-arrow-bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(6px); }
+        }
+        @media (max-width: 1024px) {
+          .hero-content {
+            grid-template-columns: 1fr;
+            text-align: center;
+            padding-top: var(--space-2xl);
+            padding-bottom: var(--space-2xl);
+          }
+          .hero-text {
+            padding-top: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+          .hero-description {
+            max-width: 100%;
+          }
+          .hero-cta-group {
+            justify-content: center;
+          }
+          .hero-scroll-indicator {
+            left: 50%;
+            transform: translateX(-50%);
+          }
+        }
         @media (max-width: 768px) {
-          .hero-arrow { display: none; }
+          .hero-title {
+            font-size: clamp(2.5rem, 12vw, 4rem);
+          }
+          .hero-description {
+            font-size: var(--text-base);
+          }
         }
       `}</style>
     </section>

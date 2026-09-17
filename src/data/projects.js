@@ -14,7 +14,7 @@ export const projects = [
     year: '',
     description: '',
     images: getProjectImages('jewel'),
-    imageAlt: 'JEWEL residence — Kharadi, Pune',
+    imageAlt: 'JEWEL residence - Kharadi, Pune',
   },
   {
     id: 2,
@@ -23,7 +23,7 @@ export const projects = [
     year: '',
     description: '',
     images: getProjectImages('kavi'),
-    imageAlt: 'KAVI bungalow — Pune',
+    imageAlt: 'KAVI bungalow - Pune',
   },
   {
     id: 3,

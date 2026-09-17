@@ -1,138 +1,169 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import logo from '../../assets/logo.png';
 
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const transition = { duration: prefersReduced ? 0 : 0.4, ease: 'easeInOut' };
+const transition = { duration: prefersReduced ? 0 : 0.5, ease: [0.16, 1, 0.3, 1] };
 
-export default function ProjectCard({ project, index }) {
+export default function ProjectCard({ project, index, total }) {
   const [imgIndex, setImgIndex] = useState(0);
 
   const { title, location, year, description, images, imageAlt } = project;
 
   const currentImg = images[imgIndex];
 
-  const goNext = () => setImgIndex((i) => (i + 1 + images.length) % images.length);
-  const goPrev = () => setImgIndex((i) => (i - 1 + images.length) % images.length);
+  const goNext = useCallback(() => setImgIndex((i) => (i + 1 + images.length) % images.length), [images.length]);
+  const goPrev = useCallback(() => setImgIndex((i) => (i - 1 + images.length) % images.length), [images.length]);
 
   return (
-    <motion.div
+    <motion.article
       className="project-card"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ ...transition, delay: index * 0.15 }}
+      viewport={{ once: true, margin: '-100px', amount: 0.3 }}
+      transition={{ ...transition, delay: index * 0.12 }}
     >
-      <div className="project-card-content">
-        <div className="project-info">
-          <h3 className="project-title">{title}</h3>
-          {description && <p className="project-description">{description}</p>}
-          <p className="project-location">{location}{location && year ? ' | ' : ''}{year}</p>
-        </div>
-        <div className="project-visual">
-          <div className="project-carousel">
-            <div className="project-carousel-stage">
-              <AnimatePresence mode="wait">
-                <motion.img
-                  key={imgIndex}
-                  src={currentImg}
-                  alt={`${imageAlt} — view ${imgIndex + 1}`}
-                  className="project-main-img"
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -50 }}
-                  transition={transition}
-                  loading="lazy"
-                />
-              </AnimatePresence>
-            </div>
-            <div className="project-watermark">
-              <img src={logo} alt="Vaastava" loading="lazy" />
-            </div>
-            <button className="carousel-arrow carousel-arrow--prev" onClick={goPrev} aria-label="Previous image">&#8249;</button>
-            <button className="carousel-arrow carousel-arrow--next" onClick={goNext} aria-label="Next image">&#8250;</button>
+      <div className="project-header">
+        <span className="project-index">
+          <span className="project-index-current">{String(index + 1).padStart(2, '0')}</span>
+          <span className="project-index-separator">/</span>
+          <span className="project-index-total">{String(total).padStart(2, '0')}</span>
+        </span>
+        <h3 className="project-title">{title}</h3>
+        <p className="project-location">
+          {location}{location && year ? ' · ' : ''}{year}
+        </p>
+      </div>
+
+      <div className="project-visual">
+        <div className="project-carousel">
+          <div className="project-carousel-stage">
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={imgIndex}
+                src={currentImg}
+                alt={`${imageAlt} - view ${imgIndex + 1}`}
+                className="project-main-img"
+                initial={{ opacity: 0, scale: 1.02 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.98 }}
+                transition={transition}
+                loading="lazy"
+              />
+            </AnimatePresence>
           </div>
-          <div className="project-thumbs">
+          <div className="project-watermark" aria-hidden="true">
+            <img src={logo} alt="" loading="lazy" />
+          </div>
+          {images.length > 1 && (
+            <>
+              <button
+                className="carousel-arrow carousel-arrow--prev"
+                onClick={goPrev}
+                aria-label="Previous image"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <path d="M15 18l-6-6 6-6" />
+                </svg>
+              </button>
+              <button
+                className="carousel-arrow carousel-arrow--next"
+                onClick={goNext}
+                aria-label="Next image"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <path d="M9 6l6 6-6 6" />
+                </svg>
+              </button>
+            </>
+          )}
+        </div>
+
+        {images.length > 1 && (
+          <div className="project-thumbs" role="tablist" aria-label="Project images">
             {images.map((src, i) => (
               <button
                 key={i}
                 className={`project-thumb${i === imgIndex ? ' active' : ''}`}
                 onClick={() => setImgIndex(i)}
                 aria-label={`View image ${i + 1}`}
+                role="tab"
+                aria-selected={i === imgIndex}
               >
                 <img src={src} alt="" loading="lazy" />
               </button>
             ))}
           </div>
-        </div>
+        )}
       </div>
-      <style>`
+
+      {description && (
+        <div className="project-description-wrapper">
+          <p className="project-description">{description}</p>
+        </div>
+      )}
+
+      <style>{`
         .project-card {
-          background: white;
-          border-radius: var(--radius-md);
-          box-shadow: var(--shadow-card);
-          margin-bottom: var(--space-lg);
-          overflow: hidden;
+          background: transparent;
+          border-radius: 0;
+          box-shadow: none;
+          overflow: visible;
         }
-        .project-card-content {
-          max-width: 800px;
-          margin: 0 auto;
-          padding: var(--space-lg) var(--space-md);
+        .project-header {
           text-align: center;
+          margin-bottom: var(--space-lg);
+          padding: 0 var(--space-sm);
         }
-        .project-info {
-          padding: var(--space-xs) 0 var(--space-sm);
+        .project-index {
+          display: inline-flex;
+          align-items: center;
+          gap: var(--space-xs);
+          font-family: var(--font-mono);
+          font-size: var(--text-xs);
+          color: var(--color-stone-light);
+          margin-bottom: var(--space-sm);
+        }
+        .project-index-separator {
+          color: var(--color-stone-light);
         }
         .project-title {
           font-family: var(--font-display);
-          font-size: var(--text-2xl);
-          font-weight: 600;
-          letter-spacing: 0.02em;
+          font-size: var(--text-3xl);
+          font-weight: 400;
+          letter-spacing: -0.02em;
+          line-height: 1.15;
           margin-bottom: var(--space-xs);
-          color: var(--color-near-black);
-        }
-        .project-description {
-          font-size: var(--text-base);
-          line-height: 1.7;
-          color: var(--color-near-black);
-          margin-bottom: var(--space-md);
+          color: var(--color-graphite);
         }
         .project-location {
-          color: var(--color-grey);
+          font-family: var(--font-body);
           font-size: var(--text-sm);
+          color: var(--color-stone);
+          font-weight: 400;
         }
         .project-visual {
           position: relative;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 1rem;
         }
         .project-carousel {
           position: relative;
-          border-radius: var(--radius-sm);
-          background: #f5f5f5;
+          border-radius: var(--radius-md);
           overflow: hidden;
-          width: 100%;
-          max-width: 600px;
-          margin: 0 auto;
+          background: var(--color-concrete);
+          aspect-ratio: 4 / 3;
         }
         .project-carousel-stage {
           position: relative;
           width: 100%;
-          height: 0;
-          padding-bottom: 66.67%;
+          height: 100%;
           overflow: hidden;
-          margin: 0 auto;
         }
         .project-main-img {
           position: absolute;
-          top: 0;
-          left: 0;
+          inset: 0;
           width: 100%;
           height: 100%;
           object-fit: cover;
-          display: block;
         }
         .project-watermark {
           position: absolute;
@@ -142,10 +173,10 @@ export default function ProjectCard({ project, index }) {
           pointer-events: none;
           user-select: none;
           z-index: 1;
-          opacity: 0.06;
+          opacity: 0.04;
         }
         .project-watermark img {
-          width: clamp(120px, 25vw, 200px);
+          width: clamp(140px, 30vw, 240px);
           height: auto;
           filter: grayscale(1);
         }
@@ -153,19 +184,17 @@ export default function ProjectCard({ project, index }) {
           position: absolute;
           top: 50%;
           transform: translateY(-50%);
-          background: rgba(0,0,0,0.45);
-          color: white;
+          background: rgba(10, 10, 10, 0.5);
+          color: var(--color-white);
           border: none;
-          width: 36px;
-          height: 36px;
+          width: 44px;
+          height: 44px;
           border-radius: 50%;
-          font-size: 1.3rem;
           cursor: pointer;
           display: flex;
           align-items: center;
           justify-content: center;
-          transition: background 0.2s;
-          line-height: 1;
+          transition: all var(--transition-fast);
           opacity: 0;
           z-index: 2;
         }
@@ -173,75 +202,100 @@ export default function ProjectCard({ project, index }) {
           opacity: 1;
         }
         .carousel-arrow:hover {
-          background: rgba(0,0,0,0.65);
+          background: rgba(10, 10, 10, 0.75);
+          transform: translateY(-50%) scale(1.05);
         }
-        .carousel-arrow--prev { left: 0.75rem; }
-        .carousel-arrow--next { right: 0.75rem; }
+        .carousel-arrow:focus-visible {
+          opacity: 1;
+          outline: 2px solid var(--color-white);
+          outline-offset: 2px;
+        }
+        .carousel-arrow--prev { left: var(--space-sm); }
+        .carousel-arrow--next { right: var(--space-sm); }
         .project-thumbs {
           display: flex;
-          gap: 0.5rem;
+          gap: var(--space-xs);
           overflow-x: auto;
-          padding-bottom: 0.25rem;
+          padding: var(--space-sm) var(--space-xs) var(--space-xs);
           scrollbar-width: thin;
           justify-content: center;
-          flex-wrap: wrap;
-          margin-top: 0.5rem;
+          -webkit-overflow-scrolling: touch;
+        }
+        .project-thumbs::-webkit-scrollbar {
+          height: 4px;
+        }
+        .project-thumbs::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .project-thumbs::-webkit-scrollbar-thumb {
+          background: var(--color-concrete);
+          border-radius: 2px;
         }
         .project-thumb {
           flex: 0 0 auto;
-          width: 58px;
-          height: 58px;
+          width: 72px;
+          height: 54px;
           border: 2px solid transparent;
           border-radius: var(--radius-sm);
           overflow: hidden;
           cursor: pointer;
           padding: 0;
-          background: none;
-          transition: border-color 0.2s;
-          opacity: 0.6;
-          transition: opacity 0.2s, border-color 0.2s;
+          background: var(--color-concrete);
+          transition: all var(--transition-fast);
+          opacity: 0.5;
         }
         .project-thumb:hover {
-          opacity: 0.85;
+          opacity: 0.8;
+          border-color: var(--color-stone-light);
         }
         .project-thumb.active {
           opacity: 1;
           border-color: var(--color-graphite);
+        }
+        .project-thumb:focus-visible {
+          opacity: 1;
+          outline: 2px solid var(--color-graphite);
+          outline-offset: 2px;
         }
         .project-thumb img {
           width: 100%;
           height: 100%;
           object-fit: cover;
         }
-        @media (max-width: 1024px) {
-          .project-card-content {
-            padding: var(--space-sm);
-          }
-          .project-title {
-            font-size: var(--text-xl);
-          }
-          .project-carousel-stage {
-            padding-bottom: 66.67%;
-          }
-          .carousel-arrow {
-            opacity: 1;
-          }
+        .project-description-wrapper {
+          max-width: var(--max-width-narrow);
+          margin: var(--space-lg) auto 0;
+          padding: 0 var(--space-sm);
+          text-align: center;
+        }
+        .project-description {
+          font-family: var(--font-body);
+          font-size: var(--text-base);
+          line-height: 1.8;
+          color: var(--color-graphite-light);
+          font-weight: 300;
         }
         @media (max-width: 768px) {
-          .project-card-content {
-            padding: var(--space-sm);
-          }
           .project-title {
-            font-size: var(--text-lg);
+            font-size: var(--text-2xl);
           }
-          .project-carousel-stage {
-            padding-bottom: 60%;
+          .project-carousel {
+            aspect-ratio: 3 / 2;
+            border-radius: var(--radius-sm);
           }
           .carousel-arrow {
             opacity: 1;
+            width: 36px;
+            height: 36px;
+          }
+          .carousel-arrow--prev { left: var(--space-xs); }
+          .carousel-arrow--next { right: var(--space-xs); }
+          .project-thumb {
+            width: 64px;
+            height: 48px;
           }
         }
-      `</style>
-    </motion.div>
+      `}</style>
+    </motion.article>
   );
 }
