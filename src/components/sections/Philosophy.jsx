@@ -58,20 +58,21 @@ export default function Philosophy({ id }) {
           padding: var(--space-xl) var(--space-md);
         }
         .philosophy-label {
-          font-family: var(--font-mono);
-          font-size: var(--text-xs);
+          font-family: var(--font-display);
+          font-size: clamp(2rem, 4vw, 3rem);
+          font-weight: 700;
           text-transform: uppercase;
-          letter-spacing: 0.3em;
-          color: var(--color-stone);
+          letter-spacing: 0.15em;
+          color: var(--color-graphite);
           margin-bottom: var(--space-md);
           display: block;
         }
         .philosophy-text {
-          font-family: var(--font-display);
-          font-size: var(--text-lg);
-          font-weight: 300;
-          line-height: 1.7;
-          color: var(--color-graphite);
+          font-family: var(--font-body);
+          font-size: clamp(1rem, 1.6vw, 1.25rem);
+          font-weight: 400;
+          line-height: 1.8;
+          color: var(--color-graphite-light);
           margin: 0;
         }
         @media (max-width: 1024px) {
