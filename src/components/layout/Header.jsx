@@ -36,9 +36,9 @@ export default function Header() {
   }, [menuOpen]);
 
   const onHero = activeId === 'home';
-  const headerBg = onHero ? 'transparent' : 'rgba(250,249,246,0.97)';
-  const textColor = onHero ? '#FFFFFF' : '#262626';
-  const shadow = onHero ? 'none' : '0 1px 0 rgba(38,38,38,0.08)';
+  const headerBg = onHero ? 'transparent' : (scrolled ? 'rgba(250,249,246,0.97)' : 'transparent');
+  const textColor = onHero ? '#FFFFFF' : (scrolled ? '#262626' : '#FFFFFF');
+  const shadow = onHero ? 'none' : (scrolled ? '0 1px 0 rgba(38,38,38,0.08)' : 'none');
 
   return (
     <motion.header

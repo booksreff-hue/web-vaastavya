@@ -59,7 +59,7 @@ export default function Philosophy({ id }) {
         }
         .philosophy-label {
           font-family: var(--font-display);
-          font-size: clamp(2rem, 4vw, 3rem);
+          font-size: clamp(1.6rem, 3vw, 2.4rem);
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.15em;
