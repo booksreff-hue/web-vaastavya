@@ -37,7 +37,7 @@ export default function Header() {
 
   const headerBg = scrolled
     ? 'rgba(250,249,246,0.97)'
-    : 'transparent';
+    : 'rgba(250,249,246,0.75)';
   const textColor = scrolled ? '#262626' : '#FFFFFF';
   const shadow = scrolled ? '0 1px 0 rgba(38,38,38,0.08)' : 'none';
 
@@ -158,7 +158,7 @@ export default function Header() {
           outline-offset: 4px;
         }
         .header-logo {
-          height: 36px;
+          height: 42px;
           width: auto;
         }
         .header-nav {

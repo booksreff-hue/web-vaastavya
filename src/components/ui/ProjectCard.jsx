@@ -173,12 +173,12 @@ export default function ProjectCard({ project, index, total }) {
           pointer-events: none;
           user-select: none;
           z-index: 1;
-          opacity: 0.1;
+          opacity: 0.3;
         }
         .project-watermark img {
-          width: clamp(168px, 36vw, 288px);
+          width: clamp(260px, 45vw, 420px);
           height: auto;
-          filter: grayscale(1);
+          filter: grayscale(0.5);
         }
         .carousel-arrow {
           position: absolute;
