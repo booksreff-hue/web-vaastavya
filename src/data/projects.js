@@ -14,7 +14,7 @@ export const projects = [
     location: 'Pune, Maharashtra',
     year: '2024',
     description: '',
-    images: getProjectImages('marvel'),
+    images: getProjectImages('1. marvel'),
     imageAlt: 'MARVEL residence - Pune',
     chronology: [
       { phase: 'Concept', date: 'Q1 2023' },
@@ -29,7 +29,7 @@ export const projects = [
     location: 'Pune, Maharashtra',
     year: '2024',
     description: '',
-    images: getProjectImages('kavi'),
+    images: getProjectImages('2. kavi'),
     imageAlt: 'KAVI bungalow - Pune',
     chronology: [
       { phase: 'Concept', date: 'Q1 2023' },
@@ -44,7 +44,7 @@ export const projects = [
     location: 'Kharadi, Pune',
     year: '2024',
     description: '',
-    images: getProjectImages('jewel'),
+    images: getProjectImages('3. jewel'),
     imageAlt: 'JEWEL residence - Kharadi, Pune',
     chronology: [
       { phase: 'Concept', date: 'Q3 2022' },
@@ -59,7 +59,7 @@ export const projects = [
     location: 'Pune, Maharashtra',
     year: '2024',
     description: '',
-    images: getProjectImages('aurum'),
+    images: getProjectImages('4. aurum'),
     imageAlt: 'AURUM residence - Pune',
     chronology: [
       { phase: 'Concept', date: 'Q2 2022' },
@@ -74,7 +74,7 @@ export const projects = [
     location: 'Pune, Maharashtra',
     year: '2024',
     description: '',
-    images: getProjectImages('amaya'),
+    images: getProjectImages('5. amaya'),
     imageAlt: 'AMAYA residence - Pune',
     chronology: [
       { phase: 'Concept', date: 'Q1 2023' },
