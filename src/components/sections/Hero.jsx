@@ -91,8 +91,9 @@ export default function Hero({ id }) {
         <div className="hero-text">
           <span className="hero-eyebrow">Architecture & Interior Design</span>
           <h1 id="hero-title" className="hero-title">
-            <LetterStagger text="Crafting Spaces." className="hero-title-stagger" />
-            <LetterStagger text="Creating Legacies." className="hero-title-stagger" />
+            <LetterStagger text="UNHEARD" className="hero-title-stagger" />
+            <LetterStagger text="UNSEEN" className="hero-title-stagger" />
+            <LetterStagger text="UNFELT" className="hero-title-stagger" />
           </h1>
           <AnimatePresence mode="wait">
             <motion.p
