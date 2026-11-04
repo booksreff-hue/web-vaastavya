@@ -5,6 +5,7 @@ import img2 from '../assets/team/team-2.png';
 import img3 from '../assets/team/team-3.jpeg';
 import img4 from '../assets/team/team-4.jpeg';
 import img5 from '../assets/team/team-5.jpeg';
+import img6 from '../assets/team/team-6.jpeg';
 
 export const teamMembers = [
   {
@@ -82,6 +83,17 @@ export const teamMembers = [
     phone: '',
     image: img5,
     imageAlt: 'Ms. Jesinta Jadhav - Architect',
+    featured: false,
+  },
+  {
+    id: 8,
+    name: 'Riya Saindane',
+    role: 'Architect',
+    education: '',
+    bio: '',
+    phone: '',
+    image: img6,
+    imageAlt: 'Riya Saindane - Architect',
     featured: false,
   },
 ];

@@ -14,18 +14,21 @@ const heroSlides = [
     title: 'Modern Architecture',
     subtitle: 'Innovative design solutions that transform skylines',
     image: `${UNSPLASH}/photo-1600596542815-ffad4c1539a9?w=1920&q=85`,
+    textColor: '#ffffff',
   },
   {
     id: 2,
     title: 'Sustainable Living',
     subtitle: 'Eco-friendly spaces that endure for generations',
     image: `${UNSPLASH}/photo-1600585154526-990dced4db0d?w=1920&q=85`,
+    textColor: '#1a1a1a',
   },
   {
     id: 3,
     title: 'Commercial Excellence',
     subtitle: 'Redefining workspaces for the future',
     image: `${UNSPLASH}/photo-1600573472550-8090b5e0745e?w=1920&q=85`,
+    textColor: '#ffffff',
   },
 ];
 
@@ -88,7 +91,7 @@ export default function Hero({ id }) {
       </AnimatePresence>
 
       <div className="hero-content">
-        <div className="hero-text">
+        <div className="hero-text" style={{ '--heroTextColor': slide.textColor }}>
           <span className="hero-eyebrow">Architecture & Interior Design</span>
           <h1 id="hero-title" className="hero-title">
             <LetterStagger text="Crafting Spaces. Creating Legacies." className="hero-title-stagger" />
@@ -186,17 +189,21 @@ export default function Hero({ id }) {
           font-size: var(--text-xs);
           text-transform: uppercase;
           letter-spacing: 0.25em;
-          color: rgba(255,255,255,0.7);
+          color: var(--heroTextColor, var(--color-white));
           margin-bottom: var(--space-md);
           display: block;
+          opacity: 0.85;
         }
         .hero-title {
           font-family: var(--font-display);
           font-size: var(--text-hero);
           font-weight: 400;
-          line-height: 1.05;
-          letter-spacing: -0.03em;
+          line-height: 1.1;
+          letter-spacing: -0.02em;
           margin-bottom: var(--space-md);
+          color: var(--heroTextColor, var(--color-white));
+          overflow-wrap: anywhere;
+          max-width: 100%;
         }
         .hero-title-stagger {
           display: block;
@@ -205,9 +212,10 @@ export default function Hero({ id }) {
           font-family: var(--font-body);
           font-size: clamp(1rem, 2vw, 1.5rem);
           font-weight: 300;
-          color: rgba(255,255,255,0.85);
+          color: var(--heroTextColor, var(--color-white));
           margin-bottom: var(--space-xl);
           min-height: 2.5em;
+          opacity: 0.9;
         }
         .hero-cta-group {
           display: flex;
@@ -223,8 +231,8 @@ export default function Hero({ id }) {
           font-weight: 500;
           letter-spacing: 0.05em;
           text-transform: uppercase;
-          color: var(--color-white);
-          border: 1px solid var(--color-white);
+          color: var(--heroTextColor, var(--color-white));
+          border: 1px solid var(--heroTextColor, var(--color-white));
           padding: var(--space-sm) var(--space-lg);
           border-radius: var(--radius-sm);
           transition: background var(--transition-base), color var(--transition-base), transform var(--transition-fast);
@@ -292,7 +300,8 @@ export default function Hero({ id }) {
         @media (max-width: 768px) {
           .hero-arrow { display: none; }
           .hero-title {
-            font-size: clamp(2.5rem, 12vw, 4rem);
+            font-size: clamp(2rem, 10vw, 3.5rem);
+            word-break: break-word;
           }
         }
       `}</style>
