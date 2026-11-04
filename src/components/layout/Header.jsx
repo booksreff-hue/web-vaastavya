@@ -35,11 +35,12 @@ export default function Header() {
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
-  const headerBg = scrolled
+  const onHero = activeId === 'home';
+  const headerBg = (scrolled || !onHero)
     ? 'rgba(250,249,246,0.97)'
-    : 'rgba(250,249,246,0.75)';
-  const textColor = scrolled ? '#262626' : '#FFFFFF';
-  const shadow = scrolled ? '0 1px 0 rgba(38,38,38,0.08)' : 'none';
+    : 'transparent';
+  const textColor = (scrolled || !onHero) ? '#262626' : '#FFFFFF';
+  const shadow = (scrolled || !onHero) ? '0 1px 0 rgba(38,38,38,0.08)' : 'none';
 
   return (
     <motion.header
