@@ -194,17 +194,18 @@ export default function Hero({ id }) {
         }
         .hero-title {
           font-family: var(--font-display);
-          font-size: var(--text-hero);
+          font-size: clamp(2.2rem, 4.5vw, var(--text-hero));
           font-weight: 600;
           line-height: 1.1;
           letter-spacing: -0.02em;
           margin-bottom: var(--space-md);
           color: var(--color-white);
-          overflow-wrap: anywhere;
+          white-space: nowrap;
           max-width: 100%;
         }
         .hero-title-stagger {
           display: block;
+          white-space: nowrap;
         }
         .hero-subtitle {
           font-family: var(--font-body);
@@ -298,8 +299,11 @@ export default function Hero({ id }) {
         @media (max-width: 768px) {
           .hero-arrow { display: none; }
           .hero-title {
-            font-size: clamp(2rem, 10vw, 3.5rem);
-            word-break: break-word;
+            font-size: clamp(1.6rem, 7vw, 3rem);
+            white-space: normal;
+          }
+          .hero-title-stagger {
+            white-space: nowrap;
           }
         }
       `}</style>
