@@ -51,7 +51,7 @@ function LetterStagger({ text, className }) {
           {char === ' ' ? '\u00A0' : char}
         </motion.span>
       ))}
-      <style>{`.hero-letter { display: inline-block; }`}</style>
+      <style>{`.hero-letter { display: inline-block; } .hero-title-stagger { display: block; }`}</style>
     </span>
   );
 }
@@ -94,7 +94,8 @@ export default function Hero({ id }) {
         <div className="hero-text" style={{ '--heroTextColor': slide.textColor }}>
           <span className="hero-eyebrow">Architecture & Interior Design</span>
           <h1 id="hero-title" className="hero-title">
-            <LetterStagger text="Crafting Spaces. Creating Legacies." className="hero-title-stagger" />
+            <LetterStagger text="Crafting Spaces." className="hero-title-stagger" />
+            <LetterStagger text="Creating Legacies." className="hero-title-stagger" />
           </h1>
           <AnimatePresence mode="wait">
             <motion.p
