@@ -48,7 +48,7 @@ function LetterStagger({ text, className }) {
           {char === ' ' ? '\u00A0' : char}
         </motion.span>
       ))}
-      <style>{`.hero-letter { display: inline-block; } .hero-title-stagger { display: block; }`}</style>
+      <style>{`.hero-letter { display: inline-block; white-space: pre; } .hero-title-stagger { display: block; white-space: nowrap; }`}</style>
     </span>
   );
 }
@@ -194,14 +194,14 @@ export default function Hero({ id }) {
         }
         .hero-title {
           font-family: var(--font-display);
-          font-size: clamp(2.2rem, 4.5vw, var(--text-hero));
+          font-size: clamp(2rem, 3.8vw, 5rem);
           font-weight: 600;
           line-height: 1.1;
           letter-spacing: -0.02em;
           margin-bottom: var(--space-md);
           color: var(--color-white);
-          white-space: nowrap;
           max-width: 100%;
+          overflow: visible;
         }
         .hero-title-stagger {
           display: block;
