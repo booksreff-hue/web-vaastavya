@@ -11,20 +11,20 @@ const UNSPLASH = 'https://images.unsplash.com';
 const heroSlides = [
   {
     id: 1,
-    title: 'Modern Architecture',
-    subtitle: 'Innovative design solutions that transform skylines',
+    title: 'UNHEARD',
+    subtitle: "I design to hear the music I haven't heard yet.",
     image: `${UNSPLASH}/photo-1600596542815-ffad4c1539a9?w=1920&q=85`,
   },
   {
     id: 2,
-    title: 'Sustainable Living',
-    subtitle: 'Eco-friendly spaces that endure for generations',
+    title: 'UNSEEN',
+    subtitle: "I don't always seek the unknown. Sometimes, I discover the extraordinary within the familiar.",
     image: `${UNSPLASH}/photo-1600585154526-990dced4db0d?w=1920&q=85`,
   },
   {
     id: 3,
-    title: 'Commercial Excellence',
-    subtitle: 'Redefining workspaces for the future',
+    title: 'UNFELT',
+    subtitle: "I don't believe architecture belongs to an era. I believe it belongs to an imagination.",
     image: `${UNSPLASH}/photo-1600573472550-8090b5e0745e?w=1920&q=85`,
   },
 ];
@@ -91,8 +91,7 @@ export default function Hero({ id }) {
         <div className="hero-text">
           <span className="hero-eyebrow">Architecture & Interior Design</span>
           <h1 id="hero-title" className="hero-title">
-            <LetterStagger text="Crafting Spaces." className="hero-title-stagger" />
-            <LetterStagger text="Creating Legacies." className="hero-title-stagger" />
+            <LetterStagger text={slide.title} className="hero-title-stagger" />
           </h1>
           <AnimatePresence mode="wait">
             <motion.p
