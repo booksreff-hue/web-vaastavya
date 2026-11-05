@@ -107,6 +107,7 @@ export default function Contact({ id }) {
           letter-spacing: -0.02em;
           line-height: 1.15;
           color: var(--color-warm-white);
+          text-align: center;
           margin-bottom: var(--space-lg);
         }
         .contact-cta {

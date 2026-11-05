@@ -30,6 +30,9 @@ export default function Work({ id }) {
           margin: 0 auto var(--space-2xl);
           text-align: center;
         }
+        .section-title {
+          text-align: center;
+        }
         .work-intro {
           font-family: var(--font-body);
           font-size: var(--text-lg);

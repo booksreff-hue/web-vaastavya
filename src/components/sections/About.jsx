@@ -69,6 +69,9 @@ export default function About({ id }) {
           margin: 0 auto var(--space-3xl);
           text-align: center;
         }
+        .section-title {
+          text-align: center;
+        }
         .about-story {
           margin-top: var(--space-xl);
           text-align: left;
