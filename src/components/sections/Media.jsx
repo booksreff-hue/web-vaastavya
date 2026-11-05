@@ -1,16 +1,17 @@
 import { mediaItems } from '../../data/media';
 import MediaCard from '../ui/MediaCard';
+import ScrollReveal from '../ui/ScrollReveal';
 
 export default function MediaCoverage({ id }) {
   return (
     <section id={id} className="media" aria-labelledby="media-title">
       <div className="container">
-        <div className="media-header">
+        <ScrollReveal className="media-header" delay={0.05}>
           <h2 id="media-title" className="section-title">Media Coverage</h2>
           <p className="media-intro">
             Features, interviews, and publications showcasing our work and perspective.
           </p>
-        </div>
+        </ScrollReveal>
 
         <div className="media-grid">
           {mediaItems.map((item, i) => (

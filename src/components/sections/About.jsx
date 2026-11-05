@@ -1,5 +1,6 @@
 import { teamMembers } from '../../data/team';
 import TeamMemberCard from '../ui/TeamMemberCard';
+import ScrollReveal from '../ui/ScrollReveal';
 
 export default function About({ id }) {
   const featuredMembers = teamMembers.filter(m => m.featured);
@@ -8,7 +9,7 @@ export default function About({ id }) {
   return (
     <section id={id} className="about" aria-labelledby="about-title">
       <div className="container">
-        <div className="about-intro">
+        <ScrollReveal className="about-intro" delay={0.05}>
           <h2 id="about-title" className="section-title">
             We Are VAASTAVYA
           </h2>
@@ -31,15 +32,15 @@ export default function About({ id }) {
               to the urban fabric of Mumbai, Ahmedabad, Bangalore, and beyond.
             </p>
           </div>
-        </div>
+        </ScrollReveal>
 
         <div className="team-section">
-          <div className="team-header">
-            <h3 className="section-title section-title-sm">Meet the Team</h3>
-            <p className="team-intro">
-              The architects and designers behind VAASTAVYA.
-            </p>
-          </div>
+        <ScrollReveal className="team-header" delay={0.15}>
+          <h3 className="section-title section-title-sm">Meet the Team</h3>
+          <p className="team-intro">
+            The architects and designers behind VAASTAVYA.
+          </p>
+        </ScrollReveal>
 
           <div className="team-grid">
             {featuredMembers.map((member, i) => (

@@ -1,18 +1,19 @@
 import { projects } from '../../data/projects';
 import ProjectCard from '../ui/ProjectCard';
+import ScrollReveal from '../ui/ScrollReveal';
 
 export default function Work({ id }) {
   return (
     <section id={id} className="work" aria-labelledby="work-title">
       <div className="container">
-        <div className="work-header">
+        <ScrollReveal className="work-header" delay={0.05}>
           <h2 id="work-title" className="section-title">
             Selected Work
           </h2>
           <p className="work-intro">
             Interior design projects that balance function, materiality, and human experience.
           </p>
-        </div>
+        </ScrollReveal>
 
         <div className="work-grid">
           {projects.map((project, i) => (

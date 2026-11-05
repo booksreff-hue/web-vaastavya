@@ -104,31 +104,38 @@ export default function Hero({ id }) {
       </AnimatePresence>
 
       <div className="hero-content">
-        <div className="hero-text">
+        <motion.div
+          className="hero-text"
+          initial={prefersReduced ? { opacity: 1 } : { opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: prefersReduced ? 0 : 0.7, ease }}
+        >
           <h1 id="hero-title" className="hero-title">
             <LetterStagger text={slide.title} className="hero-title-stagger" />
           </h1>
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={slide.id}
-              className="hero-subtitle"
-              initial={prefersReduced ? false : { opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={prefersReduced ? { opacity: 0 } : { opacity: 0, y: -20 }}
-              transition={{ duration: prefersReduced ? 0 : 0.5, ease }}
-            >
-              {slide.subtitle}
-            </motion.p>
-          </AnimatePresence>
-          <div className="hero-cta-group">
+          <motion.p
+            key={slide.id}
+            className="hero-subtitle"
+            initial={prefersReduced ? { opacity: 1 } : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: prefersReduced ? 0 : 0.6, delay: prefersReduced ? 0 : 0.15, ease }}
+          >
+            {slide.subtitle}
+          </motion.p>
+          <motion.div
+            className="hero-cta-group"
+            initial={prefersReduced ? { opacity: 1 } : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: prefersReduced ? 0 : 0.5, delay: prefersReduced ? 0 : 0.3, ease }}
+          >
             <button className="hero-cta" onClick={() => setWaOpen(true)}>
               <span>Start a Project</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </button>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
 
       <button

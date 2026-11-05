@@ -1,4 +1,5 @@
 import logo from '../../assets/logo.png';
+import ScrollReveal from '../ui/ScrollReveal';
 
 const socialLinks = [
   { label: 'Facebook', url: 'https://www.facebook.com/VAASTAVYA' },
@@ -9,7 +10,7 @@ const socialLinks = [
 export default function Footer() {
   return (
     <footer className="footer">
-      <div className="footer-inner">
+      <ScrollReveal className="footer-inner" delay={0.1}>
         <img src={logo} alt="VAASTAVYA" className="footer-logo" loading="lazy" />
         <p className="footer-tagline">VAASTAVYA - Architecture and Interior Design</p>
 
@@ -37,7 +38,7 @@ export default function Footer() {
         </div>
 
         <p className="footer-copy">&copy; {new Date().getFullYear()} VAASTAVYA. All rights reserved.</p>
-      </div>
+      </ScrollReveal>
 
       <style>{`
         .footer {
