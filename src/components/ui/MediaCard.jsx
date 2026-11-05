@@ -19,7 +19,7 @@ export default function MediaCard({ item, index }) {
     >
       <Wrapper className="media-card-link" {...wrapperProps}>
         <div className="media-card-image">
-          <img src={item.image} alt="" loading="lazy" />
+          <img src={item.image} alt={item.imageAlt || item.title} loading="lazy" />
         </div>
         <div className="media-card-body">
           <span className="media-category">{item.category}</span>
