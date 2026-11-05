@@ -20,6 +20,13 @@ export default function MediaCard({ item, index }) {
       <Wrapper className="media-card-link" {...wrapperProps}>
         <div className="media-card-image">
           <img src={item.image} alt={item.imageAlt || item.title} loading="lazy" />
+          {item.url && item.url.includes('youtube') && (
+            <button className="media-play-btn" aria-label="Watch video">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <polygon points="5 3 19 12 5 21" />
+              </svg>
+            </button>
+          )}
         </div>
         <div className="media-card-body">
           <span className="media-category">{item.category}</span>
@@ -70,6 +77,26 @@ export default function MediaCard({ item, index }) {
           height: 100%;
           object-fit: cover;
           transition: transform var(--transition-slow);
+        }
+        .media-play-btn {
+          position: absolute;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.45);
+          border: none;
+          border-radius: 50%;
+          width: 72px;
+          height: 72px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          color: var(--color-white);
+          transition: background var(--transition-fast), transform var(--transition-fast);
+          z-index: 2;
+        }
+        .media-play-btn:hover {
+          background: rgba(0, 0, 0, 0.65);
+          transform: scale(1.05);
         }
         .media-card:hover .media-card-image img {
           transform: scale(1.03);
