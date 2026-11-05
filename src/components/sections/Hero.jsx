@@ -89,7 +89,6 @@ export default function Hero({ id }) {
 
       <div className="hero-content">
         <div className="hero-text">
-          <span className="hero-eyebrow">Architecture & Interior Design</span>
           <h1 id="hero-title" className="hero-title">
             <LetterStagger text={slide.title} className="hero-title-stagger" />
           </h1>
@@ -140,8 +139,8 @@ export default function Hero({ id }) {
       <style>{`
         .hero {
           position: relative;
-          height: 100vh;
-          min-height: 600px;
+          height: 90vh;
+          min-height: 540px;
           overflow: hidden;
         }
         .hero-slide {
@@ -181,16 +180,6 @@ export default function Hero({ id }) {
         .hero-text {
           color: var(--color-white);
         }
-        .hero-eyebrow {
-          font-family: var(--font-mono);
-          font-size: var(--text-xs);
-          text-transform: uppercase;
-          letter-spacing: 0.25em;
-          color: var(--color-white);
-          margin-bottom: var(--space-md);
-          display: block;
-          opacity: 1;
-        }
         .hero-title {
           font-family: var(--font-display);
           font-size: clamp(2rem, 3.8vw, 5rem);
@@ -208,11 +197,12 @@ export default function Hero({ id }) {
         }
         .hero-subtitle {
           font-family: var(--font-body);
-          font-size: clamp(1rem, 2vw, 1.5rem);
-          font-weight: 300;
+          font-size: clamp(1.125rem, 2.2vw, 1.75rem);
+          font-weight: 400;
+          line-height: 1.7;
           color: var(--color-white);
           margin-bottom: var(--space-xl);
-          min-height: 2.5em;
+          min-height: 3em;
           opacity: 1;
         }
         .hero-cta-group {
