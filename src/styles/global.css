@@ -33,7 +33,7 @@ body {
   font-size: var(--text-base);
   line-height: 1.7;
   color: var(--color-graphite);
-  background: var(--color-warm-white);
+  background: var(--color-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
