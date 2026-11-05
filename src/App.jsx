@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Hero from './components/sections/Hero';
-import Philosophy from './components/sections/Philosophy';
 import Work from './components/sections/Work';
 import About from './components/sections/About';
 import MediaCoverage from './components/sections/Media';
@@ -25,7 +24,6 @@ function App() {
       <Header />
       <main>
         <Hero id="home" />
-        <Philosophy id="philosophy" />
         <Work id="work" />
         <About id="about" />
         <MediaCoverage id="media" />
