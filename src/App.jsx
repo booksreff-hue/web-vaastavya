@@ -6,6 +6,7 @@ import Work from './components/sections/Work';
 import About from './components/sections/About';
 import MediaCoverage from './components/sections/Media';
 import Contact from './components/sections/Contact';
+import BirthdayOverlay from './components/ui/BirthdayOverlay';
 
 function App() {
   useEffect(() => {
@@ -21,6 +22,7 @@ function App() {
 
   return (
     <>
+      <BirthdayOverlay />
       <Header />
       <main>
         <Hero id="home" />

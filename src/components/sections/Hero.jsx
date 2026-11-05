@@ -7,6 +7,7 @@ const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').mat
 const ease = [0.16, 1, 0.3, 1];
 
 const UNSPLASH = 'https://images.unsplash.com';
+const WHATSAPP_NUMBER = '919850092122';
 
 const heroSlides = [
   {
@@ -72,7 +73,7 @@ export default function Hero({ id }) {
   const handleWaSubmit = (e) => {
     e.preventDefault();
     const text = `Name: ${waName}\nPhone: ${waPhone}\nMessage: ${waMessage}`;
-    const url = `https://wa.me/${waPhone}?text=${encodeURIComponent(text)}`;
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
     window.open(url, '_blank');
     setWaOpen(false);
     setWaName('');
@@ -322,110 +323,157 @@ export default function Hero({ id }) {
         .wa-modal-overlay {
           position: fixed;
           inset: 0;
-          background: rgba(10, 10, 10, 0.55);
+          background: rgba(10, 10, 10, 0.6);
           z-index: 2000;
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: var(--space-md);
-          backdrop-filter: blur(4px);
+          padding: clamp(1rem, 4vw, 2rem);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
         }
         .wa-modal {
-          background: var(--color-white);
-          border-radius: var(--radius-md);
-          padding: var(--space-2xl);
-          width: 100%;
-          max-width: 420px;
-          max-height: 90vh;
+          background: var(--color-warm-white);
+          border: 1px solid var(--color-concrete);
+          border-radius: var(--radius-lg);
+          padding: clamp(1.5rem, 4vw, 2.5rem);
+          width: min(520px, 100%);
+          max-height: calc(100dvh - 2rem);
           overflow-y: auto;
-          box-shadow: var(--shadow-hover);
+          box-shadow: 0 24px 80px rgba(0, 0, 0, 0.18);
           position: relative;
         }
         .wa-modal-close {
           position: absolute;
-          top: var(--space-md);
-          right: var(--space-md);
-          background: none;
+          top: 1rem;
+          right: 1rem;
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          background: transparent;
           border: none;
           cursor: pointer;
           color: var(--color-graphite);
-          line-height: 1;
           padding: 0;
           display: flex;
           align-items: center;
           justify-content: center;
+          transition: background var(--transition-fast), color var(--transition-fast);
+        }
+        .wa-modal-close:hover {
+          background: var(--color-concrete);
+          color: var(--color-black);
         }
         .wa-modal-title {
           font-family: var(--font-display);
-          font-size: var(--text-xl);
+          font-size: var(--text-2xl);
           font-weight: 600;
           color: var(--color-graphite);
-          margin: 0 0 var(--space-xl) 0;
+          letter-spacing: -0.02em;
+          margin: 0 0 var(--space-xs) 0;
+          padding-right: 2.5rem;
+        }
+        .wa-modal-subtitle {
+          font-family: var(--font-body);
+          font-size: var(--text-sm);
+          line-height: 1.6;
+          color: var(--color-stone);
+          margin: 0 0 var(--space-md) 0;
         }
         .wa-form {
           display: flex;
           flex-direction: column;
-          gap: var(--space-md);
+          gap: 1.25rem;
         }
         .wa-field {
           display: flex;
           flex-direction: column;
-          gap: var(--space-xs);
+          gap: 0.4rem;
         }
         .wa-field label {
-          font-family: var(--font-body);
-          font-size: var(--text-sm);
+          font-family: var(--font-mono);
+          font-size: var(--text-xs);
           font-weight: 500;
-          color: var(--color-graphite);
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          color: var(--color-stone);
         }
         .wa-field input,
         .wa-field textarea {
           font-family: var(--font-body);
           font-size: var(--text-base);
-          padding: var(--space-sm) var(--space-md);
+          padding: 0.8rem 1rem;
           border: 1px solid var(--color-concrete);
           border-radius: var(--radius-sm);
           background: var(--color-white);
           color: var(--color-graphite);
+          transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+        }
+        .wa-field input::placeholder,
+        .wa-field textarea::placeholder {
+          color: var(--color-stone-light);
         }
         .wa-field input:focus,
         .wa-field textarea:focus {
           outline: none;
-          border-color: var(--color-black);
+          border-color: var(--color-graphite);
+          box-shadow: 0 0 0 3px rgba(38, 38, 38, 0.08);
+        }
+        .wa-field textarea {
+          min-height: 110px;
+          resize: vertical;
         }
         .wa-submit {
-          margin-top: var(--space-sm);
+          margin-top: var(--space-xs);
+          width: 100%;
           background: var(--color-black);
           color: var(--color-white);
           border: none;
-          padding: var(--space-sm) var(--space-lg);
+          padding: 0.95rem 1.5rem;
           border-radius: var(--radius-sm);
           font-family: var(--font-body);
           font-weight: 500;
           font-size: var(--text-sm);
+          letter-spacing: 0.04em;
           cursor: pointer;
-          transition: background var(--transition-fast);
+          transition: background var(--transition-fast), transform var(--transition-fast);
         }
         .wa-submit:hover {
           background: var(--color-graphite);
         }
+        .wa-submit:active {
+          transform: translateY(1px);
+        }
       `}</style>
 
-      {waOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="wa-modal-overlay"
-          onClick={(e) => { if (e.target === e.currentTarget) setWaOpen(false); }}
-        >
-          <div className="wa-modal" onClick={(e) => e.stopPropagation()}>
-            <button className="wa-modal-close" onClick={() => setWaOpen(false)} aria-label="Close">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M18 6 6 18M6 6l12 12" />
-              </svg>
-            </button>
-            <h3 className="wa-modal-title">Start a Project</h3>
+      <AnimatePresence>
+        {waOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="wa-modal-overlay"
+            onClick={(e) => { if (e.target === e.currentTarget) setWaOpen(false); }}
+          >
+            <motion.div
+              className="wa-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="wa-modal-title"
+              initial={{ opacity: 0, scale: 0.96, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.98, y: 8 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button className="wa-modal-close" onClick={() => setWaOpen(false)} aria-label="Close">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M18 6 6 18M6 6l12 12" />
+                </svg>
+              </button>
+              <h3 className="wa-modal-title" id="wa-modal-title">Start a Project</h3>
+              <p className="wa-modal-subtitle">Tell us a little about your space and we'll continue the conversation on WhatsApp.</p>
             <form className="wa-form" onSubmit={handleWaSubmit}>
               <div className="wa-field">
                 <label>Full Name</label>
@@ -459,9 +507,10 @@ export default function Hero({ id }) {
               </div>
               <button type="submit" className="wa-submit">Send via WhatsApp</button>
             </form>
-          </div>
-        </motion.div>
-      )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
