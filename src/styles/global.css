@@ -89,12 +89,13 @@ section {
   font-family: var(--font-display);
   font-size: var(--text-3xl);
   font-weight: 400;
-  margin-bottom: var(--space-lg);
+  margin: 0 auto var(--space-lg);
   padding-bottom: var(--space-sm);
   border-bottom: 1px solid var(--color-graphite);
   width: fit-content;
   color: var(--color-graphite);
   letter-spacing: -0.02em;
+  text-align: center;
 }
 
 .section-title-sm {
