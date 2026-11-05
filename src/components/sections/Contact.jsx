@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import ScrollReveal from '../ui/ScrollReveal';
+import logo from '../../assets/logo.png';
 
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const transition = { duration: prefersReduced ? 0 : 0.5, ease: [0.16, 1, 0.3, 1] };
@@ -7,7 +8,12 @@ const transition = { duration: prefersReduced ? 0 : 0.5, ease: [0.16, 1, 0.3, 1]
 const contactInfo = [
   {
     label: 'Studio',
-    value: '4, Gulmohar Grace, Plot No-129, Lane No-2, Opp. Bharat Petroleum, Lulla Nagar, Pune - 411036',
+    value: (
+      <>
+        <img src={logo} alt="VAASTAVYA" className="studio-logo" />
+        4, Gulmohar Grace, Plot No-129, Lane No-2, Opp. Bharat Petroleum, Lulla Nagar, Pune - 411036
+      </>
+    ),
     link: 'https://maps.app.goo.gl/nTdEcN2sZFpHABey5',
     linkLabel: 'View on Google Maps',
   },
@@ -165,6 +171,14 @@ export default function Contact({ id }) {
           line-height: 1.7;
           color: rgba(250,249,246,0.85);
           font-weight: 300;
+          display: flex;
+          align-items: center;
+          gap: var(--space-sm);
+        }
+        .studio-logo {
+          width: clamp(24px, 3vw, 36px);
+          height: auto;
+          display: block;
         }
         .contact-link {
           color: var(--color-warm-white);
